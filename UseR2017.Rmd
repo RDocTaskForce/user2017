@@ -1,0 +1,197 @@
+---
+title: "Updates to the R Documentatino System"
+author: |
+  Andrew Redd,
+  R documentation Task Force
+date: "UseR!2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(magrittr)
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+## History
+
+* UseR!2016
+* July R Consortium Funding
+
+* September-December 2016
+* January 2017 - Now
+
+
+## Design Principles
+
+* Full class system for documentation
+* Can document anything
+  + stored in `attr(., ‘documentation’)` for traditional objects; 
+    - functions, data.frames, etc.
+* Stored as a meta object similar to class definitions for S4 and reference classes.
+* Everything can be accessed or set from the `documentation` and `documentation<-` generics.
+* Formats for input and output support decided
+* Independent of but supports the package system
+
+
+## Many in - Many Out
+
+![Many in - Many out approach.](../Diagram1.svg)
+
+
+## Current State
+
+* `parsetools`
+* `documentation`
+* `documentation-md`
+* `documentation-yaml
+
+## `parsetools`
+
+```{r example, echo=TRUE}
+library(parsetools)
+options(keep.source=TRUE)
+pd <- get_parse_data(parse(text="x <- rnorm(100)"))
+kable(pd[-(3:4)])
+```
+
+
+------
+```{r, echo=TRUE}
+get_pd_assign_value(pd)
+get_pd_assign_variable(pd)
+```
+
+
+## `documentation`
+
+```{r example-documentation}
+library(documentation)
+x <- new('Documentation'
+        , title       = "Example documentation"
+        , author      = person('Andrew', 'Redd')
+        , description = "This is used to demonstrate the class" %\%
+                        "system for the documentation package in R"
+        , keywords    = "documentation"
+        )
+```
+
+-----
+```{r, echo=TRUE}
+str(x)
+```
+
+-----
+```{r, echo=TRUE}
+toRd(x) %>% cat(sep='\n')
+```
+
+## Something a bit more interesting
+```{r, message=FALSE, echo=TRUE}
+hw <- function(){print("hello world")}
+documentation(hw) <- function_documentation('hw', title = "the standard Hello world")
+documentation(hw) %>% toRd %>% unlist %>% cat(sep='\n')
+````
+
+
+## Can your documentation do this?
+```{r, echo=TRUE}
+make_hello <- function(what = 'world'){
+  documented(function(){
+    print(paste("hello", what))
+  }, name  = paste0("hello_", what)
+   , title = sprintf("the dynamic hello_%s example", what)
+   , description = "Prints 'hello" %\% what %\%"'to the console." %\n%
+                   "Used to show the power of dynamic documentation."
+   )
+}
+hello_world <- make_hello()
+hello_belgium <- make_hello('Belgium')
+
+hello_belgium()
+```
+
+-----
+```{r}
+documentation(hello_belgium) %>% toRd %>% unlist %>% cat(sep="\n")
+```
+
+
+## Test extraction
+
+Example R code in "./R/hello.R"
+
+```r
+hello_belgium <- make_hello('Belgium')
+if(FALSE){#@testing
+  expect_output(hello_belgium(), "hello Belgium")
+}
+
+```
+
+------
+
+We run `extract_tests()` then ...
+
+------
+
+in "./tests/testthat/test-hello.R" we will have
+```r
+#! This file was automatically produced by documentation on 2017-07-05 11:00:00
+#! changes will be overwritten.
+context('tests extracted from file `./R/hello.R`')
+test_that("hello_belgium", {#@testing
+  expect_output(hello_belgium(), "hello Belgium")
+})
+
+
+```
+
+## Something still to finish
+**Relational Tags** 
+
+
+```r
+hw <- 
+function( greet = "Hello" #< A greeting 
+        , who   = "World" #< who to greet.
+        ){
+    #! A more complicated hello world
+    print(paste(greet, who))
+    #< Called for the side effect of printing, 
+    #^ but returns the pasted arguments invisibly.
+}
+```
+
+
+## State in summary 
+
+* Documentation classes
+    + done..*ish*
+* parsetools 
+    + functionally complete
+* test extraction ... done
+* Relational tags
+    + infrastructure in place.
+    + needs to be integrated into Roxygen.
+* Input forms
+    + lots of work still to do.
+* Output forms
+    + Rd inplace but could use improvement.
+    + markdown lot to do
+    + others not started
+
+## how people can help and get involved.
+
+* Make a github request for a feature.
+* Code one of the missing functionalities
+    + code it up
+    + test the heck out of it
+    + make a pull request showing
+
+https://github.com/RDocTaskForce/
+
+* Join the mailing list
+
+https://lists.r-consortium.org/mailman/listinfo/rconsortium-wg-dtf
+
