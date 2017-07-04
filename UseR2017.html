@@ -59,9 +59,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>History</h1>
 <ul>
 <li>UseR!2016</li>
-<li><p>July R Consortium Funding</p></li>
+<li>July 2016, R Consortium Funding</li>
 <li>September-December 2016</li>
-<li><p>January 2017 - Now</p></li>
+<li>January 2017 - Now</li>
 </ul>
 </div>
 <div id="design-principles" class="slide section level2">
@@ -69,7 +69,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>Full class system for documentation</li>
 <li>Can document anything</li>
-<li>stored in <code>attr(., ‘documentation’)</code> for traditional objects;
+<li>stored in <code>attr(., âdocumentationâ)</code> for traditional objects;
 <ul>
 <li>functions, data.frames, etc.</li>
 </ul></li>
@@ -92,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>parsetools</code></li>
 <li><code>documentation</code></li>
 <li><code>documentation-md</code></li>
-<li>`documentation-yaml</li>
+<li><code>documentation-yaml</code></li>
 </ul>
 </div>
 <div id="parsetools" class="slide section level2">
@@ -100,13 +100,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parsetools)
 <span class="kw">options</span>(<span class="dt">keep.source=</span><span class="ot">TRUE</span>)
 pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span class="kw">parse</span>(<span class="dt">text=</span><span class="st">&quot;x &lt;- rnorm(100)&quot;</span>))
-<span class="kw">kable</span>(pd[-(<span class="dv">3</span>:<span class="dv">4</span>)])</code></pre></div>
+<span class="kw">kable</span>(pd[<span class="kw">c</span>(-<span class="dv">1</span>,-<span class="dv">3</span>)])</code></pre></div>
 <table>
 <thead>
 <tr class="header">
 <th></th>
-<th align="right">line1</th>
 <th align="right">col1</th>
+<th align="right">col2</th>
 <th align="right">id</th>
 <th align="right">parent</th>
 <th align="left">token</th>
@@ -138,7 +138,7 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 <tr class="odd">
 <td>14</td>
 <td align="right">1</td>
-<td align="right">1</td>
+<td align="right">15</td>
 <td align="right">14</td>
 <td align="right">0</td>
 <td align="left">expr</td>
@@ -147,8 +147,8 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </tr>
 <tr class="even">
 <td>2</td>
-<td align="right">1</td>
 <td align="right">3</td>
+<td align="right">4</td>
 <td align="right">2</td>
 <td align="right">14</td>
 <td align="left">LEFT_ASSIGN</td>
@@ -157,8 +157,8 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </tr>
 <tr class="odd">
 <td>4</td>
-<td align="right">1</td>
 <td align="right">6</td>
+<td align="right">10</td>
 <td align="right">4</td>
 <td align="right">6</td>
 <td align="left">SYMBOL_FUNCTION_CALL</td>
@@ -167,8 +167,8 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </tr>
 <tr class="even">
 <td>6</td>
-<td align="right">1</td>
 <td align="right">6</td>
+<td align="right">10</td>
 <td align="right">6</td>
 <td align="right">12</td>
 <td align="left">expr</td>
@@ -177,8 +177,8 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </tr>
 <tr class="odd">
 <td>12</td>
-<td align="right">1</td>
 <td align="right">6</td>
+<td align="right">15</td>
 <td align="right">12</td>
 <td align="right">14</td>
 <td align="left">expr</td>
@@ -187,7 +187,7 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </tr>
 <tr class="even">
 <td>5</td>
-<td align="right">1</td>
+<td align="right">11</td>
 <td align="right">11</td>
 <td align="right">5</td>
 <td align="right">12</td>
@@ -197,8 +197,8 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </tr>
 <tr class="odd">
 <td>7</td>
-<td align="right">1</td>
 <td align="right">12</td>
+<td align="right">14</td>
 <td align="right">7</td>
 <td align="right">8</td>
 <td align="left">NUM_CONST</td>
@@ -207,8 +207,8 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </tr>
 <tr class="even">
 <td>8</td>
-<td align="right">1</td>
 <td align="right">12</td>
+<td align="right">14</td>
 <td align="right">8</td>
 <td align="right">12</td>
 <td align="left">expr</td>
@@ -217,7 +217,7 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </tr>
 <tr class="odd">
 <td>9</td>
-<td align="right">1</td>
+<td align="right">15</td>
 <td align="right">15</td>
 <td align="right">9</td>
 <td align="right">12</td>
@@ -230,19 +230,130 @@ pd &lt;-<span class="st"> </span><span class="kw">get_parse_data</span>(<span cl
 </div>
 <div class="slide section level2">
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_pd_assign_value</span>(pd)</code></pre></div>
-<pre><code>##    line1 col1 line2 col2 id parent                token terminal  text
-## 4      1    6     1   10  4      6 SYMBOL_FUNCTION_CALL     TRUE rnorm
-## 6      1    6     1   10  6     12                 expr    FALSE      
-## 12     1    6     1   15 12     14                 expr    FALSE      
-## 5      1   11     1   11  5     12                  '('     TRUE     (
-## 7      1   12     1   14  7      8            NUM_CONST     TRUE   100
-## 8      1   12     1   14  8     12                 expr    FALSE      
-## 9      1   15     1   15  9     12                  ')'     TRUE     )</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_pd_assign_variable</span>(pd)</code></pre></div>
-<pre><code>##   line1 col1 line2 col2 id parent  token terminal text
-## 1     1    1     1    1  1      3 SYMBOL     TRUE    x
-## 3     1    1     1    1  3     14   expr    FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_pd_assign_value</span>(pd) %&gt;%<span class="st"> </span><span class="kw">select</span>(-<span class="kw">starts_with</span>(<span class="st">'line'</span>)) %&gt;%<span class="st"> </span>kable</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">col1</th>
+<th align="right">col2</th>
+<th align="right">id</th>
+<th align="right">parent</th>
+<th align="left">token</th>
+<th align="left">terminal</th>
+<th align="left">text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4</td>
+<td align="right">6</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="left">SYMBOL_FUNCTION_CALL</td>
+<td align="left">TRUE</td>
+<td align="left">rnorm</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td align="right">6</td>
+<td align="right">10</td>
+<td align="right">6</td>
+<td align="right">12</td>
+<td align="left">expr</td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td align="right">6</td>
+<td align="right">15</td>
+<td align="right">12</td>
+<td align="right">14</td>
+<td align="left">expr</td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">5</td>
+<td align="right">12</td>
+<td align="left">‘(’</td>
+<td align="left">TRUE</td>
+<td align="left">(</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td align="right">12</td>
+<td align="right">14</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="left">NUM_CONST</td>
+<td align="left">TRUE</td>
+<td align="left">100</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td align="right">12</td>
+<td align="right">14</td>
+<td align="right">8</td>
+<td align="right">12</td>
+<td align="left">expr</td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">9</td>
+<td align="right">12</td>
+<td align="left">‘)’</td>
+<td align="left">TRUE</td>
+<td align="left">)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_pd_assign_variable</span>(pd) %&gt;%<span class="st"> </span><span class="kw">select</span>(-<span class="kw">starts_with</span>(<span class="st">'line'</span>)) %&gt;%<span class="st"> </span>kable </code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">col1</th>
+<th align="right">col2</th>
+<th align="right">id</th>
+<th align="right">parent</th>
+<th align="left">token</th>
+<th align="left">terminal</th>
+<th align="left">text</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="left">SYMBOL</td>
+<td align="left">TRUE</td>
+<td align="left">x</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">14</td>
+<td align="left">expr</td>
+<td align="left">FALSE</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="documentation" class="slide section level2">
 <h1><code>documentation</code></h1>
@@ -307,7 +418,7 @@ x &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">'Do
     <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;hello&quot;</span>, what))
   }, <span class="dt">name  =</span> <span class="kw">paste0</span>(<span class="st">&quot;hello_&quot;</span>, what)
    , <span class="dt">title =</span> <span class="kw">sprintf</span>(<span class="st">&quot;the dynamic hello_%s example&quot;</span>, what)
-   , <span class="dt">description =</span> <span class="st">&quot;Prints 'hello&quot;</span> %\%<span class="st"> </span>what %\%<span class="st">&quot;'to the console.&quot;</span> %\n%
+   , <span class="dt">description =</span> <span class="st">&quot;Prints hello&quot;</span> %\%<span class="st"> </span>what %\%<span class="st">&quot;to the console.&quot;</span> %\n%
 <span class="st">                   &quot;Used to show the power of dynamic documentation.&quot;</span>
    )
 }
@@ -324,7 +435,7 @@ hello_belgium &lt;-<span class="st"> </span><span class="kw">make_hello</span>(<
 ## \usage{hello_Belgium()}
 ## \value{NA}
 ## \title{the dynamic hello_Belgium example}
-## \description{Prints 'hello Belgium 'to the console.
+## \description{Prints hello Belgium to the console.
 ## Used to show the power of dynamic documentation.}</code></pre>
 </div>
 <div id="test-extraction" class="slide section level2">
@@ -365,32 +476,50 @@ function( <span class="dt">greet =</span> <span class="st">&quot;Hello&quot;</sp
 </div>
 <div id="state-in-summary" class="slide section level2">
 <h1>State in summary</h1>
-<ul>
-<li>Documentation classes
-<ul>
-<li>done..<em>ish</em></li>
-</ul></li>
-<li>parsetools
-<ul>
-<li>functionally complete</li>
-</ul></li>
-<li>test extraction … done</li>
-<li>Relational tags
-<ul>
-<li>infrastructure in place.</li>
-<li>needs to be integrated into Roxygen.</li>
-</ul></li>
-<li>Input forms
-<ul>
-<li>lots of work still to do.</li>
-</ul></li>
-<li>Output forms
-<ul>
-<li>Rd inplace but could use improvement.</li>
-<li>markdown lot to do</li>
-<li>others not started</li>
-</ul></li>
-</ul>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Documentation Classes</td>
+<td align="right">done..<em>ish</em></td>
+</tr>
+<tr class="even">
+<td align="left"><code>parsetools</code></td>
+<td align="right">functionally Complete</td>
+</tr>
+<tr class="odd">
+<td align="left">test extraction</td>
+<td align="right">done</td>
+</tr>
+<tr class="even">
+<td align="left">Relational Tags</td>
+<td align="right">Infrastructure in place</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="right">Needs to integrate with Roxygen</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Input Forms</strong></td>
+<td align="right">Lots to do</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Output Forms</strong></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left"><em>Rd</em></td>
+<td align="right">in place, could use improvement</td>
+</tr>
+<tr class="odd">
+<td align="left"><em>markdown</em></td>
+<td align="right">lots to do</td>
+</tr>
+<tr class="even">
+<td align="left"><em>Others</em></td>
+<td align="right">not started</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="how-people-can-help-and-get-involved." class="slide section level2">
 <h1>how people can help and get involved.</h1>
@@ -408,6 +537,21 @@ function( <span class="dt">greet =</span> <span class="st">&quot;Hello&quot;</sp
 <li>Join the mailing list</li>
 </ul>
 <p><a href="https://lists.r-consortium.org/mailman/listinfo/rconsortium-wg-dtf" class="uri">https://lists.r-consortium.org/mailman/listinfo/rconsortium-wg-dtf</a></p>
+</div>
+<div id="acknowledgements" class="slide section level2">
+<h1>Acknowledgements</h1>
+<ul>
+<li>Special Thanks to the R Consortium for the funding for this project</li>
+<li>Thanks to the members and participants of the RDTF.
+<ul>
+<li>Richard Calaway</li>
+<li>Sarah Goslee</li>
+<li>Michael Lawrence</li>
+<li>Martin Maechler</li>
+<li>Duncan Murdoch</li>
+<li>Kirill Muller</li>
+</ul></li>
+</ul>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

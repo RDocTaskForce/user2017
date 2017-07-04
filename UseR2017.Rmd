@@ -16,8 +16,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 ## History
 
 * UseR!2016
-* July R Consortium Funding
-
+* July 2016,  R Consortium Funding
 * September-December 2016
 * January 2017 - Now
 
@@ -44,7 +43,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 * `parsetools`
 * `documentation`
 * `documentation-md`
-* `documentation-yaml
+* `documentation-yaml`
 
 ## `parsetools`
 
@@ -52,14 +51,14 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 library(parsetools)
 options(keep.source=TRUE)
 pd <- get_parse_data(parse(text="x <- rnorm(100)"))
-kable(pd[-(3:4)])
+kable(pd[c(-1,-3)])
 ```
 
 
 ------
 ```{r, echo=TRUE}
-get_pd_assign_value(pd)
-get_pd_assign_variable(pd)
+get_pd_assign_value(pd) %>% select(-starts_with('line')) %>% kable
+get_pd_assign_variable(pd) %>% select(-starts_with('line')) %>% kable 
 ```
 
 
@@ -101,7 +100,7 @@ make_hello <- function(what = 'world'){
     print(paste("hello", what))
   }, name  = paste0("hello_", what)
    , title = sprintf("the dynamic hello_%s example", what)
-   , description = "Prints 'hello" %\% what %\%"'to the console." %\n%
+   , description = "Prints hello" %\% what %\%"to the console." %\n%
                    "Used to show the power of dynamic documentation."
    )
 }
@@ -166,20 +165,22 @@ function( greet = "Hello" #< A greeting
 
 ## State in summary 
 
-* Documentation classes
-    + done..*ish*
-* parsetools 
-    + functionally complete
-* test extraction ... done
-* Relational tags
-    + infrastructure in place.
-    + needs to be integrated into Roxygen.
-* Input forms
-    + lots of work still to do.
-* Output forms
-    + Rd inplace but could use improvement.
-    + markdown lot to do
-    + others not started
+-------------------------  --------------------------------
+Documentation Classes                           done..*ish*
+`parsetools`                          functionally Complete
+test extraction                                        done
+Relational Tags                     Infrastructure in place
+                            Needs to integrate with Roxygen
+**Input Forms**                                  Lots to do
+**Output Forms**                                          
+*Rd*                        in place, could use improvement
+*markdown*                                       lots to do
+*Others*                                        not started
+-------------------------  --------------------------------
+
+
+
+
 
 ## how people can help and get involved.
 
@@ -194,4 +195,17 @@ https://github.com/RDocTaskForce/
 * Join the mailing list
 
 https://lists.r-consortium.org/mailman/listinfo/rconsortium-wg-dtf
+
+
+## Acknowledgements
+
+* Special Thanks to the R Consortium for the funding for this project
+* Thanks to the members and participants of the RDTF.
+    + Richard Calaway
+    + Sarah Goslee
+    + Michael Lawrence
+    + Martin Maechler
+    + Duncan Murdoch
+    + Kirill Muller
+
 
