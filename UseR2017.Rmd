@@ -1,10 +1,12 @@
 ---
-title: "Updates to the R Documentatino System"
+title: "Updates to the R Documentation System"
 author: |
   Andrew Redd,
   R documentation Task Force
 date: "UseR!2017"
-output: slidy_presentation
+output:
+  slidy_presentation: default
+  beamer_presentation: default
 ---
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
@@ -25,7 +27,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 
 * Full class system for documentation
 * Can document anything
-  + stored in `attr(., ‘documentation’)` for traditional objects; 
+  + stored in `attr(., 'documentation')` for traditional objects; 
     - functions, data.frames, etc.
 * Stored as a meta object similar to class definitions for S4 and reference classes.
 * Everything can be accessed or set from the `documentation` and `documentation<-` generics.
@@ -35,7 +37,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 
 ## Many in - Many Out
 
-![Many in - Many out approach.](../Diagram1.svg)
+![Many in - Many out approach.](../Diagram1.png)
 
 
 ## Current State
